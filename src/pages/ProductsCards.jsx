@@ -25,69 +25,73 @@ import '../css/ProductCards.css'
 const ProdCards = () => {
     const navigate = useNavigate();
   
-    // Si hay info del usuario disponible en el localStorage, la recuperamos
-    // en lugar de realizar una nueva consulta a la base de datos
-    const user = JSON.parse(localStorage.getItem('cart_user')) || { cart: [] }
-    user.total = user.cart.reduce((acc, current) => { return acc + parseFloat(current.price) }, 0) || 0
-  
     const [productsCards, setProductsCards] = useState([])
-    const [userCart, setUserCart] = useState({ cart: user.cart, total: user.total })
+
+    // // Si hay info del usuario disponible en el localStorage, la recuperamos
+    // // en lugar de realizar una nueva consulta a la base de datos
+    // const user = JSON.parse(localStorage.getItem('cart_user')) || { cart: [] }
+    // user.total = user.cart.reduce((acc, current) => { return acc + parseFloat(current.price) }, 0) || 0
+  
+   
+    // const [userCart, setUserCart] = useState({ cart: user.cart, total: user.total })
     const [toastMsg, setToastMsg] = useState({ show: false, msg: '' })
     // Recuperamos el método global setLoading para cambiar el estado del spinner
-    const setLoading = globalState((state) => state.setLoading)
+    // const setLoading = globalState((state) => state.setLoading)
   
-    const showCart = () => {
-      navigate('/cart', { replace: false })
-    }
+    // const showCart = () => {
+    //   navigate('/cart', { replace: false })
+    // }
   
-    const updateCart = async (card) => {
-      try {
-        user.cart.push(card)
+    // const updateCart = async (card) => {
+    //   try {
+    //     user.cart.push(card)
   
         // Recordar que por defecto al utilizar fetch, realizamos una petición tipo GET
         // Si deseamos otro tipo, debemos indicarlo con method, en este caso podemos ver
         // también la forma correcta de armar los headers para el tipo de dato enviado y
         // la inclusión del token que nos identifica, caso contrario el endpoint rechazará la solicitud.
-        setLoading(true)
-        const update = await fetch(`${appConfig.API_BASE_URL}/${appConfig.GET_PRODUCTS_ENDPOINT}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`
-          },
-          body: JSON.stringify({ cart: user.cart })
-        })
+        // setLoading(true)
+
+
+        // const update = await fetch(`${appConfig.API_BASE_URL}/${appConfig.GET_PRODUCTS_ENDPOINT}`, {
+        //   method: 'PUT',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${user.token}`
+        //   },
+        //   body: JSON.stringify({ cart: user.cart })
+        // })
   
-        const result = await update.json()
+        // const result = await update.json()
   
         // Si todo está ok, guardamos los datos recibidos en el localStorage para tenerlos a mano,
         // y recalculamos el total del carrito, esto también podría almacenarse en la base de datos.
-        if (result.status === 'OK') {
-          localStorage.setItem('cart_user', JSON.stringify(user))
-          setUserCart(current => { return { cart: user.cart, total: current.total + parseFloat(card.price) } })
-          setToastMsg({ show: true, msg: 'Producto agregado!' })
-        } else {
-          setToastMsg({ show: true, msg: result.data })
-        }
-        setLoading(false)
-      } catch (err) {
-        setToastMsg({ show: true, msg: err.message })
-        setLoading(false)
-      }
-    }
+    //     if (result.status === 'OK') {
+    //       localStorage.setItem('cart_user', JSON.stringify(user))
+    //       setUserCart(current => { return { cart: user.cart, total: current.total + parseFloat(card.price) } })
+    //       setToastMsg({ show: true, msg: 'Producto agregado!' })
+    //     } else {
+    //       setToastMsg({ show: true, msg: result.data })
+    //     }
+    //     setLoading(false)
+    //   } catch (err) {
+    //     setToastMsg({ show: true, msg: err.message })
+    //     setLoading(false)
+    //   }
+    // }
   
     // useEffect de Array vacío, se ejecuta SOLO al montar para recuperar las productcards disponibles
     useEffect(() => {
       (async () => {
         try {
-          setLoading(true)
+          // setLoading(true)
           const data = await fetch(`${appConfig.API_BASE_URL}/${appConfig.GET_PRODUCTS_ENDPOINT}`)
           const dataJson = await data.json()
           setProductsCards(dataJson.data)
-          setLoading(false)
+          // setLoading(false)
         } catch (err) {
           setToastMsg({ show: true, msg: err.message })
-          setLoading(false)
+          // setLoading(false)
         }
       })()
   
@@ -98,11 +102,12 @@ const ProdCards = () => {
      <>    
         <Carrousel />
         <Container className="mt-3 mb-3 p-3 bg-light container-blocks">
+          {/* 
           <Row>
             <Col xs={12}>
               {/*
               Si hay un token en la info de usuario, significa que está autenticado, se muestra el resumen del carrito
-              */}
+              
               {user.hasOwnProperty('token') &&
                 <div className="cart-box">
                   <h5>Pedidos en carrito</h5>
@@ -117,7 +122,7 @@ const ProdCards = () => {
                 </div>
               }
             </Col>
-          </Row>
+          </Row> */}
   
 
         <Card>
@@ -133,7 +138,7 @@ const ProdCards = () => {
           <Row>
             {/* Insertamos el componente ProdCard, pasándole las props necesarias */}
             <Col className="cards_grid">
-              {productsCards.map(card => <ProdCard key={card._id} user={user} card={card} updateCart={updateCart} showAdd={true} />)}
+              {productsCards.map(card => <ProdCard key={card._id} card={card} />)}
             </Col>
           </Row>
         </Card>
