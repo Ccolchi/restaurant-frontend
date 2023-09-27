@@ -3,23 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button, Toast } from 'react-bootstrap'
 import ProdCard from '../components/ProdCard.jsx'
 
-
 import Card from 'react-bootstrap/Card';
 import Nav from "react-bootstrap/Nav";
 
-
-
-
 import Carrousel from '../components/Carrousel.jsx';
-import Footer from '../components/Footer.jsx';
-
 import appConfig from '../config.js'
-import globalState from '../state.js'
-
 import '../css/ProductCards.css'
-
-
-
 
 
 const ProdCards = () => {

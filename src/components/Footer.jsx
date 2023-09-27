@@ -16,17 +16,17 @@ function Footer() {
               <div className="line"></div>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="link-1">
+              <Nav.Link href="https://www.instagram.com/" target="_blank">
                 <ion-icon name="logo-instagram"></ion-icon>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="link-2">
+              <Nav.Link href="https://www.facebook.com/" target="_blank">
                 <ion-icon name="logo-facebook"></ion-icon>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="link-3">
+              <Nav.Link href="https://web.whatsapp.com/" target="_blank">
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </Nav.Link>
             </Nav.Item>
