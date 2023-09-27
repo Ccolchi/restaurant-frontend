@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { BsFillCartPlusFill } from "react-icons/bs";
 
-function ProdCard({ user, card, updateProd, ShowAdd }) {
+function ProdCard({card}) {
   const [cantidad, setCantidad] = useState(1);
 
 
@@ -16,9 +16,7 @@ function ProdCard({ user, card, updateProd, ShowAdd }) {
 
   return (
            <Card className="mb-2" style={{ width: '100%' }}>
-            {/*<Card.Header><h2 className="titulo">Platos en el Menú</h2></Card.Header>*/}
-               <Card.Body>
-         
+               <Card.Body>        
                   <Card>
                       <Card.Img variant="top"src={card.image}style={{ width: '275px', float: 'left', marginRight: '0.5em' }} />
                       <Card.Body>
@@ -31,11 +29,6 @@ function ProdCard({ user, card, updateProd, ShowAdd }) {
                           <Button variant="success" onClick={() => handleCarrito(datos, cantidad)}>
                           <BsFillCartPlusFill style={{ marginRight: '0.5em' }} />Pedir
                           </Button>
-                          {/*<Button variant="link" className="btn-pedir"> Pedir </Button>*/}
-                          {/*}
-                          {user.hasOwnProperty('token') && showAdd && <button className="btn btn-secondary" onClick={() => { updateProd(card) }} style={{ width: '64px' }}><i className="fa fa-cart-plus fa-2x"></i></button>}
-                          {user.hasOwnProperty('token') && !showAdd && <button className="btn btn-secondary" onClick={() => { updateProd(card) }} style={{ width: '48px' }}><i className="fa fa-solid fa-trash"></i></button>}
-                          */}
                       </Card.Footer>
                   </Card>
 
