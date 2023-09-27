@@ -14,7 +14,6 @@ const Registro = () => {
         password: ""
       });
     
-    // useEffect con array vacío, se ejecuta SOLO al montar
     useEffect(() => {
       (async () => {
       })();
@@ -22,8 +21,8 @@ const Registro = () => {
       return () => {}
     }, [])
   
-    // Cada vez que hay un cambio de contenido en los campos del formulario,
-    // actualizamos el objeto frm
+    // Actualizamos el objeto frm cada vez que hay un cambio de contenido en los campos del formulario
+ 
     const handleChange = (event) => {
         setFrm({...frm, [event.target.name]: event.target.value});
       };
@@ -52,10 +51,10 @@ const Registro = () => {
           })
           const resultadoJson = await resultado.json();
   
-          // Si la API responde con un OK, quiere decir que el regidtro fue exitos, disponemos de datos
-          // de usuario, incluyendo un token, los almacenamos en localStorage.
+
+          // Si la API responde con un OK, quiere decir que el regidtro fue exitos
+
           if (resultadoJson.status == 'OK') {
-            localStorage.setItem('cart_user', JSON.stringify(resultadoJson.data));
             navigate('/Menus', { replace: true });
           } else {
             // Si hubo algún problema, el objeto data contendrá el mensaje de error, lo mostramos y volvemos al formulario
@@ -83,18 +82,12 @@ const Registro = () => {
                   <Form.Label>Direccion</Form.Label>
                   <Form.Control type="text" value={frm.address} name="address" maxLength={60} required onChange={handleChange} />
                 </Form.Group>                
-                
-                
-                
-                
+                             
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" placeholder="Email" value={frm.email} name="email" maxLength={32} required autoFocus onChange={handleChange} />
                 </Form.Group>
                 
-
-
-
                 <Form.Group className="mb-3">
                   <Form.Label>Clave</Form.Label>
                   <Form.Control type="password" value={frm.password} name="password" maxLength={12} required onChange={handleChange} />
